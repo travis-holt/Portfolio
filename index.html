@@ -395,9 +395,11 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
   font-family:var(--mono);font-size:11px;letter-spacing:.08em;color:var(--text);
   border:1px solid var(--line-2);border-radius:6px;padding:4px 9px;
 }
-.variant__note{font-size:12px;color:var(--dim)}
 .variant .phone{width:100%}
-.variant__foot{font-size:12.5px;color:var(--muted);display:flex;justify-content:space-between;gap:10px}
+.variant__line{
+  font-size:13px;line-height:1.5;color:var(--muted);
+  border-left:1px solid var(--line-2);padding-left:11px;
+}
 .dash__note{
   padding:0 18px 22px;font-size:13px;color:var(--dim);border-top:1px solid var(--line);padding-top:16px;
 }
@@ -828,7 +830,7 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
       <span class="tag">3 variants</span>
     </div>
     <div class="dash__body" id="dashBody"></div>
-    <p class="dash__note">Same body, same CTA across all three &mdash; only the first three seconds change. Layout shown is the delivery format, not a report.</p>
+    <p class="dash__note">Three real cuts of the same ad. Same body, same CTA &mdash; only the opening changes. Layout shown is the delivery format, not a report.</p>
   </div>
 </section>
 
@@ -927,10 +929,6 @@ function paint(el, i){
   } else {
     el.innerHTML = `<img src="${src}" alt="${WORK[i].title}" referrerpolicy="no-referrer">`;
   }
-  if (el.dataset.pos){
-    const m = el.firstElementChild;
-    if (m) m.style.objectPosition = el.dataset.pos;
-  }
 }
 document.querySelectorAll('[data-clip]').forEach(el => paint(el, +el.dataset.clip));
 
@@ -975,20 +973,27 @@ document.getElementById('pipe').innerHTML = PIPE.map(s => `
   </article>`).join('');
 
 /* ---------- variant dashboard ---------- */
+/* The three UltimaPeak hook variants — same body and CTA, three different
+   openings. Hook 03 reuses the campaign encode of the same source. */
 const VARIANTS = [
-  { id:'HOOK A', note:'Opens on the problem' },
-  { id:'HOOK B', note:'Opens on the callout' },
-  { id:'HOOK C', note:'Opens on the result' }
+  { id:'HOOK 01',
+    src:'assets/video/hook-1.mp4', poster:'assets/video/hook-1.jpg',
+    line:'&ldquo;That&rsquo;s gonna make half the men in this room uncomfortable.&rdquo;' },
+  { id:'HOOK 02',
+    src:'assets/video/hook-2.mp4', poster:'assets/video/hook-2.jpg',
+    line:'&ldquo;I&rsquo;m about to embarrass every man in this room.&rdquo;' },
+  { id:'HOOK 03',
+    src:'assets/video/ultimapeak.mp4', poster:'assets/video/hook-3.jpg',
+    line:'&ldquo;Every woman in here with a husband over 40&hellip;&rdquo;' }
 ];
 document.getElementById('dashBody').innerHTML = VARIANTS.map((v, i) => `
   <div class="variant">
     <div class="variant__head">
       <span class="variant__id">${v.id}</span>
-      <span class="variant__note">${v.note}</span>
     </div>
-    <div class="phone" data-play="0">
+    <div class="phone">
       <div class="phone__screen">
-        <div class="phone__media" data-clip="0" data-pos="${['16% 50%','50% 50%','84% 50%'][i]}"></div>
+        <div class="phone__media" data-variant="${i}"></div>
         <div class="phone__scrim"></div>
         <div class="ui ui--tt">
           <div class="ui__spacer"></div>
@@ -1000,8 +1005,22 @@ document.getElementById('dashBody').innerHTML = VARIANTS.map((v, i) => `
         </div>
       </div>
     </div>
+    <p class="variant__line">${v.line}</p>
   </div>`).join('');
-document.querySelectorAll('#dashBody [data-clip]').forEach(el => paint(el, +el.dataset.clip));
+
+/* same lazy, viewport-bound playback as the rest of the screens */
+document.querySelectorAll('#dashBody [data-variant]').forEach(el => {
+  const v = VARIANTS[+el.dataset.variant];
+  if (reduced){
+    el.innerHTML = `<img src="${v.poster}" alt="${v.id}">`;
+    return;
+  }
+  el.innerHTML = `<video data-src="${v.src}" poster="${v.poster}" muted loop playsinline preload="none" aria-label="${v.id}"></video>`;
+  const vid = el.querySelector('video');
+  vid.muted = true;
+  vid.addEventListener('error', () => { el.innerHTML = `<img src="${v.poster}" alt="${v.id}">`; });
+  if (vIO) vIO.observe(vid); else { vid.src = v.src; vid.play().catch(() => {}); }
+});
 
 /* ---------- contact ---------- */
 const mailto = `mailto:${CONTACT.email}?subject=${encodeURIComponent("Project enquiry")}`;

@@ -197,34 +197,91 @@ body::after{
 .tile__tag{font-size:13px;color:var(--dim-2);white-space:nowrap;font-weight:500}
 
 /* ============================================================
-   OFFER
+   PORTRAIT — feathered so it sits on the page, not in a box
    ============================================================ */
-.offer{display:grid;grid-template-columns:1fr .82fr;gap:64px;align-items:start}
-@media(max-width:900px){.offer{grid-template-columns:1fr;gap:44px}}
-.spec{
-  list-style:none;margin-top:34px;border-top:1px solid var(--line);
-  display:grid;grid-template-rows:repeat(4,auto);grid-auto-flow:column;column-gap:44px;
+.me{position:relative;aspect-ratio:9/16;border-radius:var(--r);overflow:hidden}
+.me img{
+  width:100%;height:100%;object-fit:cover;object-position:50% 22%;
+  filter:saturate(.88) contrast(1.06) brightness(.96);
+  -webkit-mask-image:
+    linear-gradient(to bottom, transparent 0%, #000 15%, #000 76%, transparent 99%),
+    linear-gradient(to right, transparent 0%, #000 13%, #000 87%, transparent 100%);
+  mask-image:
+    linear-gradient(to bottom, transparent 0%, #000 15%, #000 76%, transparent 99%),
+    linear-gradient(to right, transparent 0%, #000 13%, #000 87%, transparent 100%);
+  -webkit-mask-composite:source-in;mask-composite:intersect;
 }
-@media(max-width:900px){.spec{display:block}}
-.spec li{
-  display:flex;justify-content:space-between;gap:24px;align-items:baseline;
-  padding:15px 0;border-bottom:1px solid var(--line);
+.me::after{ /* warm grade so the portrait sits in the same light as the clips */
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(to top, rgba(255,77,23,.16), transparent 58%);
 }
-.spec b{font-weight:500;color:var(--dim)}
-.spec span{font-weight:650;letter-spacing:-.01em;text-align:right}
-.price{
-  border:1px solid var(--line);border-radius:20px;background:var(--card);
-  padding:32px;position:sticky;top:88px;overflow:hidden;
+.me__tag{
+  position:absolute;left:0;right:0;bottom:8px;text-align:center;
+  font-size:12.5px;font-weight:600;letter-spacing:.01em;color:var(--dim);
 }
-@media(max-width:900px){.price{position:relative;top:0}}
-.price::before{
-  content:"";position:absolute;top:-120px;right:-120px;width:300px;height:300px;
-  background:radial-gradient(circle, rgba(255,77,23,.22), transparent 65%);pointer-events:none;
+.me__tag b{color:var(--cream);font-weight:600}
+
+/* ============================================================
+   CLIENTS
+   ============================================================ */
+.clients{padding-block:64px}
+.clients__in{display:flex;flex-wrap:wrap;align-items:center;gap:20px 48px}
+.clients__list{display:flex;flex-wrap:wrap;align-items:center;gap:14px 34px}
+.clients__list a{
+  font-family:var(--display);font-size:clamp(24px,3vw,36px);letter-spacing:-.015em;
+  color:var(--dim);transition:color .18s ease;
 }
-.price__num{font-family:var(--display);font-size:74px;line-height:1;letter-spacing:-.02em;margin:16px 0 4px;position:relative}
-.price__num small{font-family:var(--sans);font-size:16px;font-weight:500;color:var(--dim-2);letter-spacing:0}
-.price p{color:var(--dim);position:relative}
-.price hr{border:0;border-top:1px solid var(--line);margin:20px 0}
+.clients__list a:hover{color:var(--acid)}
+
+/* ============================================================
+   HOW IT'S MADE
+   ============================================================ */
+.tools{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+@media(max-width:820px){.tools{grid-template-columns:1fr}}
+.tool{
+  border:1px solid var(--line);border-radius:16px;background:var(--card);
+  padding:26px 24px 24px;transition:border-color .2s ease;
+}
+.tool:hover{border-color:var(--line-2)}
+.tool__mark{height:30px;display:flex;align-items:center;color:var(--cream);opacity:.92}
+.tool__mark img{height:100%;width:auto}
+.tool__n{
+  margin-top:20px;font-size:12.5px;font-weight:600;color:var(--dim-2);
+  display:flex;align-items:center;gap:8px;
+}
+.tool__n b{color:var(--cream);font-size:17px;font-weight:650;letter-spacing:-.02em}
+.tool p{margin-top:9px;font-size:14.5px;line-height:1.55;color:var(--dim)}
+
+.craft{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:18px;align-items:start}
+@media(max-width:820px){.craft{grid-template-columns:1fr}}
+.craft__box{
+  border:1px solid var(--line);border-radius:16px;padding:26px 24px;
+  background:var(--bg-2);
+}
+.craft__box h3{font-size:19px;font-weight:650;letter-spacing:-.02em;margin-bottom:9px}
+.craft__box p{font-size:14.5px;line-height:1.6;color:var(--dim)}
+.craft__box--hook{border-color:rgba(255,77,23,.32)}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.chips span{
+  font-size:12.5px;font-weight:500;color:var(--dim);
+  border:1px solid var(--line);border-radius:999px;padding:7px 13px;background:var(--card);
+}
+
+/* the three hook openings, stacked like takes on one timeline */
+.takes{margin-top:18px;display:flex;flex-direction:column;gap:8px}
+.take{
+  display:flex;align-items:center;gap:12px;padding:11px 13px;
+  border:1px solid var(--line);border-radius:9px;background:var(--card);
+  font-size:13.5px;color:var(--dim);
+}
+.take i{
+  flex:none;width:20px;height:20px;border-radius:5px;background:rgba(255,77,23,.14);
+  color:var(--acid);font-size:10.5px;font-weight:700;font-style:normal;
+  display:flex;align-items:center;justify-content:center;
+}
+.take span{color:var(--cream)}
+.take--body{border-style:dashed;color:var(--dim-2)}
+.take--body i{background:rgba(255,255,255,.06);color:var(--dim-2)}
 
 /* ============================================================
    PROCESS
@@ -309,9 +366,8 @@ body::after{
     <a href="#top" class="mark"><i></i>Turki</a>
     <nav class="nav__links">
       <a href="#work">Work</a>
-      <a href="#offer">Retainer</a>
-      <a href="#process">Process</a>
-      <a href="#contact" class="btn btn--solid nav__cta">Free sample</a>
+      <a href="#made">How it&rsquo;s made</a>
+      <a href="#contact" class="btn btn--solid nav__cta">Work with me</a>
     </nav>
   </div>
 </header>
@@ -323,15 +379,14 @@ body::after{
     <div>
       <p class="kicker rv">AI UGC · Meta &amp; TikTok</p>
       <h1 class="d1 rv">Three seconds to stop the scroll. <span>That's the whole job.</span></h1>
-      <p class="lede rv">I make AI UGC ads for DTC brands and the buyers running them. You send the product. I send back ten hooks and the ads to test them with.</p>
+      <p class="lede rv">I make AI UGC ads for DTC brands and the buyers running them. You send the product. I send back the angle, and three ways into it.</p>
       <div class="hero__actions rv">
-        <a href="#contact" class="btn btn--solid">Get one ad free <span class="arrow">→</span></a>
+        <a href="#contact" class="btn btn--solid">Work with me <span class="arrow">→</span></a>
         <a href="#work" class="btn btn--ghost">Watch the work</a>
       </div>
       <div class="hero__meta rv">
-        <span><b>10 ads</b> a month</span>
-        <span><b>48–72h</b> a batch</span>
-        <span><b>EN + AR</b></span>
+        <span><b>9:16</b> · 4:5 · 1:1</span>
+        <span><b>English</b> &amp; Arabic</span>
         <span><b>Cairo</b> · GMT+2</span>
       </div>
     </div>
@@ -343,6 +398,17 @@ body::after{
 <section class="mq" aria-hidden="true">
   <div class="mq__row mq__row--a" id="mqA"></div>
   <div class="mq__row mq__row--b" id="mqB"></div>
+</section>
+
+<!-- ══════════════════ CLIENTS ══════════════════ -->
+<section class="wrap clients rule">
+  <div class="clients__in rv">
+    <p class="kicker" style="flex:none">Worked with</p>
+    <div class="clients__list">
+      <a href="https://ultimapeak.com/" target="_blank" rel="noopener">UltimaPeak</a>
+      <a href="https://mypatchestore.com/" target="_blank" rel="noopener">MyPatchStore</a>
+    </div>
+  </div>
 </section>
 
 <!-- ══════════════════ WORK ══════════════════ -->
@@ -357,75 +423,67 @@ body::after{
   <div class="work" id="workGrid"></div>
 </section>
 
-<!-- ══════════════════ OFFER ══════════════════ -->
-<section class="sec wrap rule" id="offer">
-  <div class="offer">
-    <div class="rv">
-      <p class="kicker">The retainer</p>
-      <h2 class="d2" style="margin:16px 0 20px">Every ad dies. The good ones just take longer.</h2>
-      <p class="lede">One winner buys you two or three weeks. Then the account needs the next one. A retainer means there is always a next one ready before the current one flatlines.</p>
-      <ul class="spec">
-        <li><b>Creatives per month</b><span>10</span></li>
-        <li><b>Turnaround per batch</b><span>48–72 hours</span></li>
-        <li><b>Hook variants</b><span>3 per winner</span></li>
-        <li><b>Revisions</b><span>2 rounds</span></li>
-        <li><b>Formats</b><span>9:16 · 4:5 · 1:1</span></li>
-        <li><b>Languages</b><span>English · Arabic</span></li>
-        <li><b>Overlap</b><span>GMT+2 · GCC hours</span></li>
-      </ul>
-    </div>
-
-    <aside class="price rv">
-      <p class="kicker">Starter tier</p>
-      <div class="price__num">$1,000<small> /mo</small></div>
-      <p class="small">Ten creatives a month. Scales with volume and speed.</p>
-      <hr>
-      <p class="small">Runs async over email or DM. Brief in, creative out. If you want a call I'll take one, but you won't need it.</p>
-      <a href="#contact" class="btn btn--solid" style="margin-top:24px;width:100%;justify-content:center">Start with a free sample <span class="arrow">→</span></a>
-    </aside>
-  </div>
-</section>
-
-<!-- ══════════════════ PROCESS ══════════════════ -->
-<section class="sec wrap rule" id="process">
+<!-- ══════════════════ HOW IT'S MADE ══════════════════ -->
+<section class="sec wrap rule" id="made">
   <div class="sechead rv">
     <div>
-      <p class="kicker">How a batch runs</p>
-      <h2 class="d2" style="margin-top:16px">Brief Monday. Ads Thursday.</h2>
+      <p class="kicker">How it&rsquo;s made</p>
+      <h2 class="d2" style="margin-top:16px">Three tools in, one cut out.</h2>
     </div>
+    <p>Nothing here is a stock template. Presenter, voice and motion get built per script, then cut by hand.</p>
   </div>
-  <div class="steps rv">
-    <article class="step">
-      <div class="step__n">01</div>
-      <h3>Brief</h3>
-      <p>Product, offer, and whatever is already running. That is the entire intake.</p>
+
+  <div class="tools rv">
+    <article class="tool">
+      <div class="tool__mark"><img src="data:image/png;base64,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" alt="" aria-hidden="true"></div>
+      <div class="tool__n">01 &nbsp;<b>HeyGen</b></div>
+      <p>The presenter and the delivery. Face, pacing, and the read that has to land before anyone scrolls.</p>
     </article>
-    <article class="step">
-      <div class="step__n">02</div>
-      <h3>Hooks</h3>
-      <p>I write eight to ten openings against the angle. You pick the ones worth spending on.</p>
+    <article class="tool">
+      <div class="tool__mark"><svg width="26" height="26" fill="currentColor" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>ElevenLabs</title><path d="M4.6035 0v24h4.9317V0zm9.8613 0v24h4.9317V0z"/></svg></div>
+      <div class="tool__n">02 &nbsp;<b>ElevenLabs</b></div>
+      <p>Voice. Tone matched to the angle, in English or Arabic, then timed against the cut.</p>
     </article>
-    <article class="step">
-      <div class="step__n">03</div>
-      <h3>Build</h3>
-      <p>Presenter, voice, b-roll, edit. Captions burned in, exported to platform spec.</p>
+    <article class="tool">
+      <div class="tool__mark"><img src="data:image/png;base64,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" alt="" aria-hidden="true"></div>
+      <div class="tool__n">03 &nbsp;<b>Higgsfield</b></div>
+      <p>Motion and b-roll. The product shots and inserts that carry the middle of the ad.</p>
     </article>
-    <article class="step">
-      <div class="step__n">04</div>
-      <h3>Test</h3>
-      <p>You upload and read the data. Whatever wins gets fresh hook variants next batch.</p>
-    </article>
+  </div>
+
+  <div class="craft rv">
+    <div class="craft__box">
+      <h3>Then it gets edited like an ad</h3>
+      <p>Premiere and After Effects. Captions burned in so it plays sound-off, and pacing cut to the hook rather than to the script.</p>
+      <div class="chips">
+        <span>Premiere Pro</span>
+        <span>After Effects</span>
+        <span>Burned-in captions</span>
+        <span>9:16 · 4:5 · 1:1</span>
+        <span>Platform-spec exports</span>
+      </div>
+    </div>
+    <div class="craft__box craft__box--hook">
+      <h3>Three hooks, one body</h3>
+      <p>Every concept ships with three openings on the same body. You test the first three seconds &mdash; the part that decides the ad &mdash; without paying to produce three ads.</p>
+      <div class="takes">
+        <div class="take"><i>A</i><span>Hook one</span> &mdash; the problem</div>
+        <div class="take"><i>B</i><span>Hook two</span> &mdash; the callout</div>
+        <div class="take"><i>C</i><span>Hook three</span> &mdash; the result</div>
+        <div class="take take--body"><i>&#9654;</i>Same body &amp; CTA</div>
+      </div>
+    </div>
   </div>
 </section>
 
 <!-- ══════════════════ CTA ══════════════════ -->
 <section class="sec cta rule" id="contact">
   <div class="wrap">
-    <p class="kicker rv">No pitch, no call</p>
-    <h2 class="d2 rv">Send me your product. I'll send back one ad, free.</h2>
-    <p class="rv">If it works, we talk about the retainer. If it doesn't, keep the file.</p>
+    <p class="kicker rv">Let&rsquo;s talk</p>
+    <h2 class="d2 rv">Tell me what you&rsquo;re running and where it stalls.</h2>
+    <p class="rv">Send the product, the offer, and the ads already in the account. I&rsquo;ll tell you what I&rsquo;d cut.</p>
     <div class="cta__actions rv">
-      <a class="btn btn--solid" data-contact="email">Email me <span class="arrow">→</span></a>
+      <a class="btn btn--solid" data-contact="email">Work with me <span class="arrow">→</span></a>
       <a class="btn btn--ghost" data-contact="instagram" target="_blank" rel="noopener">DM on Instagram</a>
     </div>
     <p class="cta__note rv">Usually replies same day</p>
@@ -438,7 +496,7 @@ body::after{
   <div class="wrap foot__in">
     <a href="#top" class="mark"><i></i>Turki</a>
     <nav class="foot__links" id="footLinks"></nav>
-    <div class="foot__stack">HeyGen · ElevenLabs · Higgsfield · Premiere Pro · After Effects — Cairo, GMT+2</div>
+    <div class="foot__stack">AI UGC ad creative · English &amp; Arabic · Cairo, GMT+2</div>
   </div>
 </footer>
 
@@ -460,6 +518,11 @@ const CONTACT = {
   x:         "",                           // ✏️ optional
   linkedin:  ""                            // ✏️ optional
 };
+
+/* ✏️ Your photo. Save it at this path (portrait/vertical crops sit best).
+   If the file is missing the hero quietly falls back to four clips, so the
+   page never renders broken. */
+const PORTRAIT = "assets/turki.jpg";
 
 /* ════════════════════════════════════════════════════════════
    ✏️  2. HOOK LINES — these scroll across the marquee.
@@ -495,7 +558,7 @@ const WORK = [
 ];
 
 /* ---------- contact links ---------- */
-const mailto = `mailto:${CONTACT.email}?subject=${encodeURIComponent("Free sample request")}`;
+const mailto = `mailto:${CONTACT.email}?subject=${encodeURIComponent("Project enquiry")}`;
 document.querySelectorAll('[data-contact]').forEach(el => {
   el.href = el.dataset.contact === 'email' ? mailto : CONTACT[el.dataset.contact];
 });
@@ -542,11 +605,25 @@ function clip(w, eager){
   return `<a class="clip" ${link} aria-label="${isFile ? 'Play' : 'Open set'}: ${w.title}">${inner}</a>`;
 }
 
-/* hero mosaic — two columns, the second one dropped down */
+/* hero mosaic — portrait plus three clips, in two offset columns */
+const portraitTile = `<figure class="me" id="meTile">
+    <img src="${PORTRAIT}" alt="Turki" loading="eager">
+    <figcaption class="me__tag"><b>Turki</b> · Cairo</figcaption>
+  </figure>`;
+
 document.getElementById('heroMos').innerHTML =
-  [[0, 2], [1, 3]].map(col =>
-    `<div class="mos__col">${col.map(i => WORK[i] ? clip(WORK[i], true) : '').join('')}</div>`
-  ).join('');
+  [[portraitTile, clip(WORK[2], true)], [clip(WORK[1], true), clip(WORK[3], true)]]
+    .map(col => `<div class="mos__col">${col.join('')}</div>`).join('');
+
+/* If the photo has not been added yet, swap the tile for the remaining clip
+   rather than leaving a broken image in the hero. */
+{
+  const meImg = document.querySelector('#meTile img');
+  if (meImg) meImg.addEventListener('error', () => {
+    const t = document.getElementById('meTile');
+    if (t) t.outerHTML = clip(WORK[0], true);
+  });
+}
 
 /* work grid */
 document.getElementById('workGrid').innerHTML = WORK.map(w => `

@@ -200,7 +200,7 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
 .adcard__who b{font-size:11.5px;font-weight:600;color:#1C1E21}
 .adcard__who span{font-size:10px;color:#65686C;display:block;line-height:1.2}
 .adcard__media{position:relative;aspect-ratio:9/16;background:#111;overflow:hidden}
-.adcard__media img{width:100%;height:100%;object-fit:cover}
+.adcard__media img,.adcard__media video{width:100%;height:100%;object-fit:cover;display:block}
 .adcard__cta{
   display:flex;align-items:center;justify-content:space-between;gap:8px;
   padding:8px 10px;background:#F7F8FA;font-size:10.5px;color:#65686C;
@@ -302,7 +302,7 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
 .ui--fb .fbhead span{font-size:10px;color:#65686C}
 .ui--fb .fbtext{padding:0 12px 8px;font-size:11.5px;line-height:1.4}
 .ui--fb .fbmedia{position:relative;flex:1;min-height:0;overflow:hidden;background:#000}
-.ui--fb .fbmedia img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.ui--fb .fbmedia img,.ui--fb .fbmedia video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .ui--fb .fbcta{
   display:flex;align-items:center;justify-content:space-between;
   padding:9px 12px;background:#F0F2F5;font-size:11px;
@@ -890,24 +890,40 @@ const WORK = [
    drop them in assets/video/, and put the filename here. Any slot left
    as "" keeps the still frame instead. Nothing breaks either way. */
 const VIDEOS = [
-  "",   // assets/video/ultimapeak.mp4
-  "",   // assets/video/injury.mp4
-  "",   // assets/video/podcast.mp4
-  ""    // assets/video/animation.mp4
+  "assets/video/ultimapeak.mp4",
+  "assets/video/injury.mp4",
+  "assets/video/podcast.mp4",
+  "assets/video/animation.mp4"
 ];
 
 const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const poster = i => POSTERS[WORK[i].id] || `https://drive.google.com/thumbnail?id=${WORK[i].id}&sz=w800`;
 
 /* ---------- fill every screen ---------- */
+const vIO = 'IntersectionObserver' in window ? new IntersectionObserver(es => {
+  es.forEach(en => {
+    const v = en.target;
+    if (en.isIntersecting){
+      if (!v.src && v.dataset.src) v.src = v.dataset.src;
+      const p = v.play();
+      if (p) p.catch(() => {});
+    } else if (!v.paused) {
+      v.pause();
+    }
+  });
+}, { rootMargin: '250px 0px' }) : null;
+
 function paint(el, i){
   const src = poster(i);
   const v = VIDEOS[i];
   if (v && !reduced){
-    el.innerHTML = `<video src="${v}" poster="${src}" muted loop playsinline autoplay preload="metadata"></video>`;
-    el.querySelector('video').addEventListener('error', () => {
+    el.innerHTML = `<video data-src="${v}" poster="${src}" muted loop playsinline preload="none" aria-label="${WORK[i].title}"></video>`;
+    const vid = el.querySelector('video');
+    vid.muted = true;                       // Safari ignores the attribute alone
+    vid.addEventListener('error', () => {
       el.innerHTML = `<img src="${src}" alt="${WORK[i].title}" referrerpolicy="no-referrer">`;
     });
+    if (vIO) vIO.observe(vid); else { vid.src = v; vid.play().catch(() => {}); }
   } else {
     el.innerHTML = `<img src="${src}" alt="${WORK[i].title}" referrerpolicy="no-referrer">`;
   }

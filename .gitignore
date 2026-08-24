@@ -1,0 +1,4 @@
+# Full-length source ads live here but are far too large for Pages.
+# assets/video/ holds the compressed loops the site actually uses.
+*.mp4
+!assets/video/*.mp4

@@ -203,7 +203,7 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
 }
 .adcard__status i{width:6px;height:6px;border-radius:50%;background:#31A24C;display:block}
 .adcard__who{display:flex;align-items:center;gap:7px;margin-top:7px}
-.adcard__av{width:19px;height:19px;border-radius:50%;background:#C9CCD1;flex:none;overflow:hidden}
+.adcard__av{width:19px;height:19px;border-radius:50%;background:#C9CCD1 center/cover no-repeat;flex:none;overflow:hidden;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)}
 .adcard__who b{font-size:11.5px;font-weight:600;color:#1C1E21}
 .adcard__who span{font-size:10px;color:#65686C;display:block;line-height:1.2}
 .adcard__media{position:relative;aspect-ratio:9/16;background:#111;overflow:hidden}
@@ -264,6 +264,7 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
   width:22px;height:22px;border-radius:50%;display:block;flex:none;
   background:linear-gradient(135deg,#555,#222);border:1px solid rgba(255,255,255,.35);
 }
+.ui__user i[style]{background-size:cover;background-position:center;background-repeat:no-repeat}
 .ui__spon{
   font-size:9.5px;font-weight:500;opacity:.85;margin-top:3px;
   display:flex;align-items:center;gap:4px;
@@ -304,7 +305,7 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
 .ui--fb .ui__status{color:#050505}
 .ui--fb .fbcard{margin-top:8px;background:#fff;flex:1;min-height:0;display:flex;flex-direction:column}
 .ui--fb .fbhead{display:flex;align-items:center;gap:8px;padding:9px 12px}
-.ui--fb .fbhead i{width:30px;height:30px;border-radius:50%;background:#D8DADF;flex:none}
+.ui--fb .fbhead i{width:30px;height:30px;border-radius:50%;background:#D8DADF center/cover no-repeat;flex:none;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)}
 .ui--fb .fbhead b{font-size:12px;font-weight:600;display:block}
 .ui--fb .fbhead span{font-size:10px;color:#65686C}
 .ui--fb .fbtext{padding:0 12px 8px;font-size:11.5px;line-height:1.4}
@@ -336,6 +337,9 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
 .case:nth-child(even) .case__media{order:-1}
 .case__no{font-family:var(--mono);font-size:12px;color:var(--dim);letter-spacing:.1em}
 .case h3{margin:14px 0 14px}
+.case__brand{display:flex;align-items:center;gap:14px;margin:14px 0}
+.case__brand h3{margin:0}
+.brandmark{width:40px;height:40px;border-radius:50%;flex:none;display:block;box-shadow:0 0 0 1px var(--line-2)}
 .case__list{list-style:none;margin-top:24px;border-top:1px solid var(--line)}
 .case__list li{
   display:flex;justify-content:space-between;gap:20px;align-items:baseline;
@@ -629,7 +633,7 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
               <span class="ui__act"><i><svg viewBox="0 0 24 24"><path d="M14 3v4C8 8 5 12 4 19c2.5-3.5 5.5-5 10-5v4l6-7.5L14 3Z"/></svg></i>Share</span>
             </div>
             <div class="ui__foot">
-              <div class="ui__user"><i></i>ultimapeak</div>
+              <div class="ui__user"><i style="background-image:url(assets/brands/ultimapeak.png)"></i>ultimapeak</div>
               <div class="ui__spon">Sponsored</div>
               <div class="ui__cap">Every woman in here with a husband over 40&hellip;</div>
               <div class="ui__cta"><span>Shop now</span><span>&rsaquo;</span></div>
@@ -645,7 +649,7 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
       <div class="phone">
         <div class="phone__screen">
           <div class="phone__notch"></div>
-          <div class="phone__media" data-clip="1"></div>
+          <div class="phone__media" data-clip="3"></div>
           <div class="phone__scrim"></div>
           <div class="ui ui--ig">
             <div class="ui__status"><span>9:41</span><span>▮▮▮</span></div>
@@ -657,10 +661,10 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
               <span class="ui__act"><i><svg viewBox="0 0 24 24"><path d="M14 3v4C8 8 5 12 4 19c2.5-3.5 5.5-5 10-5v4l6-7.5L14 3Z"/></svg></i>Share</span>
             </div>
             <div class="ui__foot">
-              <div class="ui__user"><i></i>injurycounsel</div>
+              <div class="ui__user"><i style="background-image:url(assets/brands/larine.png)"></i>larine</div>
               <div class="ui__spon">Sponsored</div>
-              <div class="ui__cap">The insurance company has a script.</div>
-              <div class="ui__cta"><span>Learn more</span><span>&rsaquo;</span></div>
+              <div class="ui__cap">If you still have yellow teeth&hellip;</div>
+              <div class="ui__cta"><span>Shop now</span><span>&rsaquo;</span></div>
             </div>
             <div class="ui__bar"><i></i></div>
           </div>
@@ -677,7 +681,7 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
             <div class="ui__status"><span>9:41</span><span>▮▮▮</span></div>
             <div class="fbcard">
               <div class="fbhead">
-                <i></i>
+                <i style="background-image:url(assets/brands/mypatches.png)"></i>
                 <div>
                   <b>mypatches</b>
                   <span>Sponsored · <svg width="9" height="9" viewBox="0 0 24 24" fill="#65686C" style="display:inline"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Z"/></svg></span>
@@ -710,7 +714,10 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
     <div class="case__grid">
       <div class="rv">
         <div class="case__no">Campaign 01</div>
-        <h3 class="h3">Remineralizing Gum</h3>
+        <div class="case__brand">
+          <img class="brandmark" src="assets/brands/larine.png" alt="" width="40" height="40">
+          <h3 class="h3">Remineralizing Gum</h3>
+        </div>
         <p class="lede">Car-selfie UGC with word-by-word captions. Every claim &mdash; whitening, enamel, xylitol &mdash; is backed by a search result on screen before the three flavours land on the close.</p>
         <ul class="case__list">
           <li><b>Brand</b><span><a href="https://buylarine.com/" target="_blank" rel="noopener">Larine &nearr;</a></span></li>
@@ -730,7 +737,7 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
               <div class="ui__title">Reels</div>
               <div class="ui__spacer"></div>
               <div class="ui__foot">
-                <div class="ui__user"><i></i>larine</div>
+                <div class="ui__user"><i style="background-image:url(assets/brands/larine.png)"></i>larine</div>
                 <div class="ui__spon">Sponsored</div>
                 <div class="ui__cta"><span>Shop now</span><span>&rsaquo;</span></div>
               </div>
@@ -746,7 +753,10 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
     <div class="case__grid">
       <div class="rv">
         <div class="case__no">Campaign 02</div>
-        <h3 class="h3">UltimaPeak</h3>
+        <div class="case__brand">
+          <img class="brandmark" src="assets/brands/ultimapeak.png" alt="" width="40" height="40">
+          <h3 class="h3">UltimaPeak</h3>
+        </div>
         <p class="lede">A supplement angle shot as a stage moment rather than a bathroom selfie. The presenter, the room and the crowd are all generated, then cut so the callout lands before the first scroll.</p>
         <ul class="case__list">
           <li><b>Brand</b><span>UltimaPeak</span></li>
@@ -766,7 +776,7 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
               <div class="ui__status"><span>9:41</span><span>▮▮▮</span></div>
               <div class="ui__spacer"></div>
               <div class="ui__foot">
-                <div class="ui__user"><i></i>ultimapeak</div>
+                <div class="ui__user"><i style="background-image:url(assets/brands/ultimapeak.png)"></i>ultimapeak</div>
                 <div class="ui__spon">Sponsored</div>
                 <div class="ui__cta"><span>Shop now</span><span>&rsaquo;</span></div>
               </div>
@@ -819,7 +829,10 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
     <div class="case__grid">
       <div class="rv">
         <div class="case__no">Campaign 04</div>
-        <h3 class="h3">Nerve Patch</h3>
+        <div class="case__brand">
+          <img class="brandmark" src="assets/brands/mypatches.png" alt="" width="40" height="40">
+          <h3 class="h3">Nerve Patch</h3>
+        </div>
         <p class="lede">A kitchen-counter testimonial cut against glowing nerve-pathway b&#8209;roll that shows the ingredients at work, then a wall of reviews and the offer card to close.</p>
         <ul class="case__list">
           <li><b>Brand</b><span><a href="https://mypatchestore.com/" target="_blank" rel="noopener">mypatches &nearr;</a></span></li>
@@ -838,7 +851,7 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
               <div class="ui__status"><span>9:41</span><span>▮▮▮</span></div>
               <div class="ui__spacer"></div>
               <div class="ui__foot">
-                <div class="ui__user"><i></i>mypatches</div>
+                <div class="ui__user"><i style="background-image:url(assets/brands/mypatches.png)"></i>mypatches</div>
                 <div class="ui__spon">Sponsored</div>
                 <div class="ui__cta"><span>Shop now</span><span>&rsaquo;</span></div>
               </div>
@@ -970,12 +983,12 @@ const POSTERS = {"1H5ZwVGR_7hRViW2jNu7W05r12JIm_9nt": "data:image/jpeg;base64,/9
 const LOGOS = {"heygen":"data:image/png;base64,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","higgsfield":"data:image/png;base64,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","elevenlabs":"<svg width=\"15\" height=\"15\" fill=\"currentColor\" role=\"img\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><title>ElevenLabs</title><path d=\"M4.6035 0v24h4.9317V0zm9.8613 0v24h4.9317V0z\"/></svg>","premiere":"<svg width=\"26\" height=\"26\" fill=\"currentColor\" role=\"img\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M10.15 8.42a2.93 2.93 0 00-1.18-.2 13.9 13.9 0 00-1.09.02v3.36l.39.02h.53c.39 0 .78-.06 1.15-.18.32-.09.6-.28.82-.53.21-.25.31-.59.31-1.03a1.45 1.45 0 00-.93-1.46zM19.75.3H4.25A4.25 4.25 0 000 4.55v14.9c0 2.35 1.9 4.25 4.25 4.25h15.5c2.35 0 4.25-1.9 4.25-4.25V4.55C24 2.2 22.1.3 19.75.3zm-7.09 11.65c-.4.56-.96.98-1.61 1.22-.68.25-1.43.34-2.25.34l-.5-.01-.43-.01v3.21a.12.12 0 01-.11.14H5.82c-.08 0-.12-.04-.12-.13V6.42c0-.07.03-.11.1-.11l.56-.01.76-.02.87-.02.91-.01c.82 0 1.5.1 2.06.31.5.17.96.45 1.34.82.32.32.57.71.73 1.14.15.42.23.85.23 1.3 0 .86-.2 1.57-.6 2.13zm6.82-3.15v1.95c0 .08-.05.11-.16.11a4.35 4.35 0 00-1.92.37c-.19.09-.37.21-.51.37v5.1c0 .1-.04.14-.13.14h-1.97a.14.14 0 01-.16-.12v-5.58l-.01-.75-.02-.78c0-.23-.02-.45-.04-.68a.1.1 0 01.07-.11h1.78c.1 0 .18.07.2.16a3.03 3.03 0 01.13.92c.3-.35.67-.64 1.08-.86a3.1 3.1 0 011.52-.39c.07-.01.13.04.14.11v.04z\"/></svg>","aftereffects":"<svg width=\"26\" height=\"26\" fill=\"currentColor\" role=\"img\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M8.54 10.73c-.1-.31-.19-.61-.29-.92s-.19-.6-.27-.89c-.08-.28-.15-.54-.22-.78h-.02c-.09.43-.2.86-.34 1.29-.15.48-.3.98-.46 1.48-.13.51-.29.98-.44 1.4h2.54c-.06-.21-.14-.46-.23-.72-.09-.27-.18-.56-.27-.86zm8.58-.29c-.55-.03-1.07.26-1.33.76-.12.23-.19.47-.22.72h2.109c.26 0 .45 0 .57-.01.08-.01.16-.03.23-.08v-.1c0-.13-.021-.25-.061-.37-.178-.56-.708-.94-1.298-.92zM19.75.3H4.25C1.9.3 0 2.2 0 4.55v14.9c0 2.35 1.9 4.25 4.25 4.25h15.5c2.35 0 4.25-1.9 4.25-4.25V4.55C24 2.2 22.1.3 19.75.3zm-7.04 16.511h-2.09c-.07.01-.14-.041-.16-.11l-.82-2.4H5.92l-.76 2.36c-.02.09-.1.15-.19.14H3.09c-.11 0-.14-.06-.11-.18L6.2 7.39c.03-.1.06-.19.1-.31.04-.21.06-.43.06-.65-.01-.05.03-.1.08-.11h2.59c.07 0 .12.03.13.08l3.65 10.25c.03.11.001.161-.1.161zm7.851-3.991c-.021.189-.031.33-.041.42-.01.07-.069.13-.14.13-.06 0-.17.01-.33.021-.159.02-.35.029-.579.029-.23 0-.471-.04-.73-.04h-3.17c.039.31.14.62.31.89.181.271.431.48.729.601.4.17.841.26 1.281.25.35-.011.699-.04 1.039-.11.311-.039.61-.119.891-.23.05-.039.08-.02.08.08v1.531c0 .039-.01.08-.021.119-.021.03-.04.051-.069.07-.32.14-.65.24-1 .3-.471.09-.94.13-1.42.12-.761 0-1.4-.12-1.92-.35-.49-.211-.921-.541-1.261-.95-.319-.39-.55-.83-.69-1.31-.14-.471-.209-.961-.209-1.461 0-.539.08-1.07.25-1.59.16-.5.41-.96.75-1.37.33-.4.739-.72 1.209-.95.471-.23 1.03-.31 1.67-.31.531-.01 1.06.09 1.55.31.41.18.77.45 1.05.8.26.34.47.72.601 1.14.129.4.189.81.189 1.22 0 .24-.01.45-.019.64z\"/></svg>"};
 
 const WORK = [
-  { title: "UltimaPeak",         tag: "Supplement", id: "1H5ZwVGR_7hRViW2jNu7W05r12JIm_9nt", brand: "UltimaPeak", cta: "Shop now" },
+  { title: "UltimaPeak",         tag: "Supplement", logo: "assets/brands/ultimapeak.png", id: "1H5ZwVGR_7hRViW2jNu7W05r12JIm_9nt", brand: "UltimaPeak", cta: "Shop now" },
   { title: "Injury Counsel",     tag: "Legal",      brand: "Injury Counsel", cta: "Learn more",
     poster: "assets/video/injury.jpg",     full: "assets/video/injury-full.mp4" },
-  { title: "Nerve Patch",        tag: "Supplement", brand: "mypatches",      cta: "Shop now",
+  { title: "Nerve Patch",        tag: "Supplement", logo: "assets/brands/mypatches.png", brand: "mypatches",      cta: "Shop now",
     poster: "assets/video/nervepatch-product.jpg", full: "assets/video/nervepatch-full.mp4" },
-  { title: "Remineralizing Gum", tag: "Oral care",  brand: "Larine",         cta: "Shop now",
+  { title: "Remineralizing Gum", tag: "Oral care",  logo: "assets/brands/larine.png", brand: "Larine",         cta: "Shop now",
     poster: "assets/video/larine.jpg",     full: "assets/video/larine-full.mp4" },
   { title: "Animated spot",      tag: "Animation",  id: "1YWqKMWrtH6mzG153Eg8Xq_RGIfjZtPsu", brand: "Turki", cta: "Learn more", inHouse: true }
 ];
@@ -1033,7 +1046,7 @@ document.getElementById('alGrid').innerHTML = WORK.map((w, i) => w.inHouse ? '' 
     <div class="adcard__head">
       <span class="adcard__status"><i></i>Active</span>
       <div class="adcard__who">
-        <span class="adcard__av"></span>
+        <span class="adcard__av"${w.logo ? ` style="background-image:url(${w.logo})"` : ''}></span>
         <div><b>${w.brand}</b><span>${w.tag} · Video</span></div>
       </div>
     </div>
@@ -1109,7 +1122,7 @@ document.getElementById('dashBody').innerHTML = VARIANTS.map((v, i) => `
         <div class="ui ui--tt">
           <div class="ui__spacer"></div>
           <div class="ui__foot">
-            <div class="ui__user"><i></i>ultimapeak</div>
+            <div class="ui__user"><i style="background-image:url(assets/brands/ultimapeak.png)"></i>ultimapeak</div>
             <div class="ui__spon">Sponsored</div>
           </div>
           <div class="ui__bar"><i style="animation-delay:${i * 700}ms"></i></div>
